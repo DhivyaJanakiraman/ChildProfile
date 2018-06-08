@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-part form</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="main">
+    <form action="" method="POST" id="my-form">
+      <div>
+        <button type="button" id="backBtn" onclick="changeTab(-1)">
+          <span>&#171;</span> Back to Account
+        </button>
+      </div>
+      <div class="tab">
+        <div class="container">
+          <p class="main-title"> What is the child's
+            <strong>name?</strong>
+          </p>
+          <div id="inputs">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" placeholder="Steve" name="first_name">
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" placeholder="Kiwi" name="last_name">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab">
+        <div class="container">
+          <p class="main-title"> When is
+            <span id="child_name"></span>
+            <strong>birthday?</strong>
+
+          </p>
+          <img src="https://icdn.kiwicrate.com/site/account/letscelebrate.png" alt="bithday_img">
+          <input type="date" name="birthday" placeholder="MM/DD/YYYY" id="dateInp">
+        </div>
+      </div>
+
+      <div class="tab">
+        <div class="container">
+          <p class="main-title"> Select
+            <span id="child_name1"></span>
+            <strong>gender</strong>
+          </p>
+          <div class="img-container">
+
+
+            <label onchange="changeTab(1)">
+              <input type="radio" name="gender" value="boy">
+              <img src="http://icdn.kiwicrate.com/site/account/gender-boy.png" alt="boy">
+            </label>
+
+            <label onchange="changeTab(1)">
+              <input type="radio" name="gender" value="girl">
+              <img src="http://icdn.kiwicrate.com/site/account/gender-girl.png" alt="girl">
+            </label>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="tab">
+        <div class="container">
+          <p class="main-title"> What is
+            <span id="child_gender"></span>
+            <strong> relationship </strong> to you?
+          </p>
+          <div id="radioButtons"></div>
+        </div>
+      </div>
+      <div class="container">
+        <button type="button" id="nextBtn" onclick="changeTab(1)">
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <script>
+    var current = 0;
+    DisplayTab(current);
+    var user_info = {};
+    var radioBtns = [];
+
+    function DisplayTab(n) {
+      document.getElementById("nextBtn").style.display = "inline";
+      var x = document.getElementsByClassName("tab");
+      x[n].style.display = "block";
+
+      if (n === 0) {
+        $('#backBtn').hide();
+      } else {
+        $('#backBtn').show();
+      }
+
+      if (n == (x.length - 1)) {
+        $('#nextBtn').html("Done");
+      } else {
+        $('#nextBtn').html("Next &#187");
+      }
+
+      if (n === 1 && user_info["first_name"] !== undefined) {
+        document.getElementById("child_name").innerHTML = user_info["first_name"] + "'s";
+      }
+
+      if (n === 2 && user_info["birthday"] !== undefined) {
+        console.log('coming inside gender');
+        $('#nextBtn').hide();
+        document.getElementById("child_name1").innerHTML = user_info["first_name"] + "'s";
+      }
+
+      if (n === 3 && user_info['gender'] !== undefined) {
+
+        document.getElementById("child_gender").innerHTML = user_info["gender"] == "boy" ? " his " : " her ";
+        if (user_info['gender'] === 'boy') {
+          radioBtns = ["Son", "Grandson", "Nephew", "Family Friend", "Other"];
+        } else {
+          radioBtns = ["Daughter", "Grand Daughter", "Niece", "Family Friend", "Other"];
+        }
+        var radioParent = document.getElementById('radioButtons');
+        radioParent.innerHTML = "";
+        for (var i = 0; i < radioBtns.length; i++) {
+          $("<div class='relation'> <label>  <input type='radio' name='relation' value=" + radioBtns[i] + " /> " + radioBtns[i] + "</label></div>").appendTo(radioParent);;
+        }
+      }
+    }
+
+    function changeTab(n) {
+      var queryString = $('#my-form').serialize();
+      user_info = extractData(queryString);
+      console.log(user_info);
+
+      if (n === 1 && !validateInput()) {
+        return false;
+      }
+      var x = document.getElementsByClassName("tab");
+      x[current].style.display = "none";
+      current = current + n;
+      console.log('CURRENT ', current);
+      if (current >= x.length) {
+        document.getElementById('my-form').submit();
+        return false;
+      }
+      DisplayTab(current);
+    }
+
+    function extractData(input) {
+      var arr = input.split('&');
+      for (var i = 0; i < arr.length; i++) {
+        var key = arr[i].split('=')[0];
+        var value = arr[i].split('=')[1] || "";
+        user_info[key] = value;
+      }
+      return user_info;
+    }
+
+    function validateInput() {
+      var valid = true;
+      var tabs, inputs;
+      var relationSelected = $('input[name=relation]:checked').length > 0;
+      tabs = document.getElementsByClassName("tab");
+      inputs = tabs[current].getElementsByTagName("input");
+
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value === "") {
+          inputs[i].classList.add("error");
+          valid = false;
+        }
+        else {
+          inputs[i].classList.remove("error");
+        }
+      }
+      if (current === 3 && !relationSelected) {
+        valid = false;
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+
+</html>

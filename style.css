@@ -1,0 +1,217 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white;
+  font-family: "Museo Sans", Arial, Helvetica, Verdana, sans-serif;
+}
+
+img {
+  width: 70%;
+  margin: 25px auto;
+}
+
+input[type="text"].error {
+  border: 1px solid red;
+}
+input[type="date"].error {
+  border: 1px solid red;
+}
+#main {
+  width: 85%;
+  height: 100%;
+  background: #efefef;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+  margin: 40px auto;
+}
+
+.container {
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  padding: 35px;
+  width: 100%;
+}
+
+#inputs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 30px;
+  padding: 5px;
+}
+
+#inputs div {
+  width: 50%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+#dateInp {
+  width: 55%;
+  text-align: center;
+  padding: 5px 5px;
+  margin: 20px auto;
+}
+.main-title {
+  font-size: 22px;
+  font-weight: normal;
+  text-align: center;
+  line-height: 1.2em;
+}
+
+#backBtn {
+  color: #25bdbe;
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+#backBtn:hover {
+  padding: 15px;
+}
+
+button#nextBtn {
+  font-family: inherit;
+  padding: 12px 20px;
+  font-size: 16px;
+  margin: 10px auto;
+  background: rgb(255, 143, 50);
+  border-color: transparent;
+  border-bottom: solid 2px #e26e17;
+  color: white;
+  border-radius: 5px;
+  width: 60%;
+}
+
+#nextBtn:hover {
+  background: rgb(226, 110, 23);
+}
+
+.form-group {
+  margin-top: 30px;
+}
+
+.form-group label {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+input[type="text"] {
+  background: white;
+  padding: 10px 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+input[type="date"] {
+  max-width: 0 0 50%; /* fix me */
+  margin: auto;
+  padding: 20px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.tab {
+  display: none;
+}
+.img-container {
+  display: flex;
+  display: -webkit-flex;
+}
+.img-container > label > input {
+  visibility: hidden;
+  position: absolute;
+}
+.img-container label {
+  width: 60%;
+  margin: 20px 10px;
+  border: 1px solid transparent;
+  justify-content: space-around;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.img-container label:hover {
+  box-shadow: 0 15px 5px rgba(0, 0, 0, 0.25);
+}
+
+#radioButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+div.relation {
+  width: 50%;
+  margin-top: 30px;
+}
+
+div.relation > label {
+  justify-content: center;
+}
+
+@media screen and (min-width: 601px) {
+  .main-title {
+    font-size: 32px;
+    text-align: center;
+    line-height: 1.2em;
+  }
+  #dateInp {
+    width: 45%;
+    text-align: center;
+    padding: 15px 5px;
+    margin: 10px auto;
+  }
+  #inputs {
+    flex-direction: column;
+  }
+  #inputs div {
+    width: 100%;
+  }
+  .form-group label {
+    font-size: 16px;
+  }
+
+  #nextBtn {
+    width: 35%;
+  }
+  img {
+    width: 75%;
+    margin: 25px auto;
+  }
+  #main {
+    width: 80%;
+    margin: 30px auto;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+  }
+  #nextBtn {
+    width: 55%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  img {
+    width: 55%;
+    margin: 25px auto;
+  }
+}
