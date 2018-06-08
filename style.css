@@ -9,11 +9,12 @@ body {
   font-family: "Museo Sans", Arial, Helvetica, Verdana, sans-serif;
 }
 
-img {
-  width: 70%;
-  margin: 25px auto;
+/* Hide all tabs initially */
+.tab {
+  display: none;
 }
 
+/* Error display on input box */
 input[type="text"].error {
   border: 1px solid red;
 }
@@ -21,6 +22,7 @@ input[type="date"].error {
   border: 1px solid red;
 }
 
+/* common for all tabs  */
 #main {
   width: 85%;
   height: 100%;
@@ -41,26 +43,11 @@ input[type="date"].error {
   width: 100%;
 }
 
-#inputs {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-top: 30px;
-  padding: 5px;
+img {
+  width: 70%;
+  margin: 25px auto;
 }
 
-#inputs div {
-  width: 50%;
-  margin: 10px;
-  box-sizing: border-box;
-}
-
-#dateInp {
-  width: 55%;
-  text-align: center;
-  padding: 5px 5px;
-  margin: 20px auto;
-}
 .main-title {
   font-size: 22px;
   font-weight: normal;
@@ -100,16 +87,6 @@ button#nextBtn {
   background: rgb(226, 110, 23);
 }
 
-.form-group {
-  margin-top: 30px;
-}
-
-.form-group label {
-  display: inline-block;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 600;
-}
 input[type="text"] {
   background: white;
   padding: 10px 10px;
@@ -120,7 +97,7 @@ input[type="text"] {
 }
 
 input[type="date"] {
-  max-width: 0 0 50%; /* fix me */
+  max-width: 0 0 50%;
   margin: auto;
   padding: 20px;
   border: none;
@@ -128,9 +105,42 @@ input[type="date"] {
   font-size: 1em;
 }
 
-.tab {
-  display: none;
+/* Tab 1  */
+
+#inputs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 30px;
+  padding: 5px;
 }
+
+#inputs div {
+  width: 50%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-top: 30px;
+}
+
+.form-group label {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Tab 2 */
+#dateInp {
+  width: 55%;
+  text-align: center;
+  padding: 5px 5px;
+  margin: 20px auto;
+}
+
+/* Tab 3  */
 .img-container {
   display: flex;
   display: -webkit-flex;
@@ -153,6 +163,7 @@ input[type="date"] {
   box-shadow: 0 15px 5px rgba(0, 0, 0, 0.25);
 }
 
+/* Tab 4 */
 #radioButtons {
   display: flex;
   flex-direction: row;
@@ -168,6 +179,9 @@ div.relation > label {
   justify-content: center;
 }
 
+/* MEDIA QUERIES */
+
+/* For bigger screens  */
 @media screen and (min-width: 601px) {
   .main-title {
     font-size: 32px;
