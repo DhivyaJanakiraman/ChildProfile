@@ -20,6 +20,7 @@ input[type="text"].error {
 input[type="date"].error {
   border: 1px solid red;
 }
+
 #main {
   width: 85%;
   height: 100%;
